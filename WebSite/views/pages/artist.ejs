@@ -1,0 +1,152 @@
+<%- include ('../partials/header') %>
+<%- include ('../partials/menu') %>
+<%- include ('../partials/message') %>
+
+<main>
+
+<body class= "main" style="background-color:rgb(0, 0, 0);">
+    <div class="container">
+            <br>
+            <h1 class="title">Search By Artist</h1>
+            <br>
+
+            <form action="/artist" method="POST">
+                <div class="input-group">
+                    <input type="search" class="form-control rounded" placeholder="Search"
+                        aria-label="Search" aria-describedby="search-addon" name="search"
+                        id="search" placeholder="Search..." />
+                    <button type="submit" class="btn btn-primary" >Search</button>
+                </div>
+                <br>
+                <div>
+                    <label for="resultsLabel">Maximum Results: <%= rows%> </label>
+                </div>
+                    <label for="resultsLabel2">Change To </label>
+        
+                    <select name="maxResults" id="maxResults">
+                        <option value="0" selected></option>
+                        <option value="1">1</option>
+                        <option value="3">3</option>
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                    </select>
+            </form>
+            <br>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Song</th>
+                        <th scope="col">Artwork</th>
+                        <th scope="col">Artist</th>
+                        <th scope="col">Genre</th>
+                        <th scope="col">Release Date</th>
+                        <th scope="col">Link</th>
+                        <th scope="col">Review</th>
+                    </tr>
+                </thead>
+                <% songs.forEach(function(element){%>
+                    <tr>
+                        <td>
+                            <%= element.name.substring(0, 25) %>
+                            <br>
+                            <%= element.name.substring(25, 50) %>
+                            <br>
+                            <%= element.name.substring(50, 75) %>
+                            <br>
+                            <%= element.name.substring(75, 100) %>
+                        </td>
+                        <td>
+                            <img style="width:160px; height: 137px; border-color:#19d1f6" class="img-thumbnail shadow-sm p-1 mb-1 bg-white rounded" style=border:1px src="<%= element.artwork_url%>"</img>
+                        </td>
+                        <td>
+                            <%= element.artist_name %>
+                        </td>
+                        <td>
+                            <%= element.genre %>
+                        </td>
+                        <td>
+                            <%= element.release_date.toLocaleDateString() %> 
+                        </td>
+                        <td>
+                            <a href="<%= element.link %>"</a> <%= element.link.substring(0, 24) %>
+                            <input type="hidden" name="link" id="link" value="<%= element.link %>">
+                        </td>
+                        <td>
+                            
+                            <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ratingModal">Add Review</button>
+                            <div class="modal fade" id="ratingModal" tabindex="-1" aria-labelledby="ratingModalLabel" aria-hidden="true" style="background-color:rgba(0, 0, 0, 0.516);">
+                                <div class="modal-dialog">
+                                <div class="modal-content" style="background-color:rgb(0, 0, 0);"">
+                                    <div class="modal-header">
+                                    <form action="/reviews" method="POST">
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    <h5 class="modal-title" id="ratingModalLabel">Review</h5>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="form-form-auto" id="song">
+                                            <label for="song" class="col-form-auto">Song: <%= element.name %></label>
+                                        </div>
+                                        <div class="form-form-auto" id="artist">
+                                            <label for="artist" class="col-form-auto">Artist: <%= element.artist_name %></label>
+                                        </div>
+                                        <div class="form-form-auto" id="artist">
+                                            <img style="width:160px; height: 137px;" class="img-thumbnail shadow-sm p-1 mb-1 bg-white rounded" style=border:1px solid #A9A9A9' src="<%= element.artwork_url%>"</img>
+                                        </div>
+
+                                        <div class="form-form-auto">
+                                            <label for="reviewName" class="col-form-auto">Name</label>
+                                            <input type="text" id="reviewName" class="form-control" name="reviewName" required>
+                                        </div>
+                                        
+                                        <div class="form-outline mb-3" id="description">
+                                            <label for="Description" class="col-sm-3 col-form-label">Comments</label>
+                                            <div class="description box"> 
+                                                <textarea name="description" id="descriptionBox" cols="55" rows="5" required></textarea>
+                                            </div>
+                                                <!-- <input type="text" class="form-control" id="description"> -->
+                                        </div>
+                                        <div class="form-form-auto" id="ratingNum">
+                                            <label for="Rating" class="col-form-auto">Rating</label>
+                                            <div class="rating" required> 
+                                                <input type="radio" name="rating" value="5" id="5">
+                                                <label for="5">☆</label> 
+                                                <input type="radio" name="rating" value="4" id="4">
+                                                <label for="4">☆</label> 
+                                                <input type="radio" name="rating" value="3" id="3">
+                                                <label for="3">☆</label> 
+                                                <input type="radio" name="rating" value="2" id="2">
+                                                <label for="2">☆</label> 
+                                                <input type="radio" name="rating" value="1" id="1" required>
+                                                <label for="1">☆</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+
+                                    <input type="hidden" name="name" id="name" value="<%= element.name %>">
+                                    <input type="hidden" name="image" id="image" value="<%= element.artwork_url%>">
+                                    <input type="hidden" name="artist" id="artist" value="<%= element.artist_name %>">
+                                    <input type="hidden" name="genre" id="genre" value="<%= element.genre %>">
+                                    <input type="hidden" name="release_date" id="release_date" value="<%= element.release_date.toLocaleDateString() %>">
+                                    <input type="hidden" name="link" id="link" value="<%= element.link %>">
+                                            
+                                    <button class="btn btn-warning btn-block rating-submit">Submit Review</button>
+                                    </form>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            </div>
+            
+                        </td>
+                    </tr>
+                    <% });%>
+            </table>
+    </div>
+</body>
+</main>
+
+<%- include ('../partials/footer') %>
