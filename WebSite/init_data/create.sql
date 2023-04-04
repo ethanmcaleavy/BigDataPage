@@ -22,8 +22,8 @@ CREATE TABLE reviewedSongs(
     review_date DATE
 );
 
-CREATE TABLE DatabaseImageTable (
-    project_num INT AUTOINCREMENT PRIMARY KEY , 
-	imageName VARCHAR(45),
-    imageFile VARBINARY(max)  
-);
+-- CREATE TABLE DatabaseImageTable (
+--     project_num INT AUTOINCREMENT PRIMARY KEY , 
+-- 	imageName VARCHAR(45),
+--     imageFile VARBINARY(max)  
+-- );
