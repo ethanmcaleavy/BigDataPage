@@ -1,11 +1,13 @@
 const express = require("express");
 const server = express();
 const fileUpload = require('express-fileupload');
+const bodyParser = require('body-parser');
+const ejs = require('ejs');
 
 server.use(express.static('public'));
-server.use('/images', express.static('images'));
+server.use('/upload', express.static('upload'));
 server.use(fileUpload());
-
+server.set('view engine', 'ejs');
 
 
 server.listen(8080, () => {
@@ -13,15 +15,15 @@ server.listen(8080, () => {
 });
 
 server.get('/', (req, res) => {
-    res.sendFile(__dirname + '/helloworld.html');
+    res.render('helloworld.ejs');
   });
 
   server.get('/newpage', function(req, res) {
-    res.sendFile(__dirname + '/secondHelloWorld.html');
+    res.render('secondHelloWorld.ejs');
 });
 
 server.get('/newpage2', function(req, res) {
-    res.sendFile(__dirname + '/helloworld.html');
+    res.render('helloworld.ejs');
 });
 
 server.post('/upload', (req, res) => {
@@ -33,6 +35,6 @@ server.post('/upload', (req, res) => {
 
   // Move the uploaded image to our upload folder
   image.mv(__dirname + '/upload/' + image.name);
+  res.redirect('/newpage')
 
-  res.sendStatus(200);
 });
