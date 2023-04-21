@@ -1,6 +1,9 @@
 const express = require("express");
 const server = express();
 
+server.use(express.static('public'));
+server.use('/images', express.static('images'));
+
 server.listen(8080, () => {
   console.log("Application started and Listening on port 8080");
 });
