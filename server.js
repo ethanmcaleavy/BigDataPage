@@ -3,8 +3,6 @@ const server = express();
 const fileUpload = require('express-fileupload');
 const bodyParser = require('body-parser');
 const ejs = require('ejs');
-let fileName = "error";
-
 const { spawn } = require("child_process");
 
 server.use(express.static('public'));
@@ -12,6 +10,8 @@ server.use('/upload', express.static('upload'));
 server.use(fileUpload());
 server.set('view engine', 'ejs');
 
+
+let fileName = "error";
 
 server.listen(8080, () => {
   console.log("Application started and Listening on port 8080");
@@ -26,11 +26,21 @@ server.get('/', (req, res) => {
     res.render('helloworld.ejs');
   });
 
+server.get('/newpage', function(req, res) {
+  console.log("second " + fileName)
 
+    //Begin child process
+    const py = spawn('python',['py-script.py', fileName])
+  
+    let image = ""; 
+    py.stdout.on(`data`, (data) => {
+      image += data; // Append the received data to the variable
+      res.render('secondHelloWorld.ejs', { name: fileName, additional: image });
+  });
 
-  server.get('/newpage', function(req, res) {
-    console.log("second " + fileName)
-    res.render('secondHelloWorld.ejs',  { name: fileName});
+    py.on('close', (code) => {
+      console.log(`child process exited with code ${code}`);
+    });
 });
 
 server.get('/newpage2', function(req, res) {
