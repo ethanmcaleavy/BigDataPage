@@ -18,8 +18,10 @@ server.get('/', (req, res) => {
     res.render('helloworld.ejs');
   });
 
-  server.get('/newpage', function(req, res) {
-    res.render('secondHelloWorld.ejs');
+  server.get('/newpage/:fileNameB', function(req, res) {
+    const fileNameA = req.params.fileNameB;
+    console.log("second " + fileNameA)
+    res.render('secondHelloWorld.ejs',  { name: fileNameA});
 });
 
 server.get('/newpage2', function(req, res) {
@@ -29,12 +31,14 @@ server.get('/newpage2', function(req, res) {
 server.post('/upload', (req, res) => {
   // Get the file that was set to our field named "image"
   const { image } = req.files;
+  const fileNameB = image.name;
+  console.log("first " + fileNameB)
 
   // If no image submitted, exit
   if (!image) return res.sendStatus(400);
 
   // Move the uploaded image to our upload folder
   image.mv(__dirname + '/upload/' + image.name);
-  res.redirect('/newpage')
+  res.redirect('/newpage/' + encodeURIComponent(fileNameB));
 
 });
