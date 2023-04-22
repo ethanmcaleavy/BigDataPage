@@ -20,15 +20,15 @@ server.listen(8080, () => {
 server.get('/', (req, res) => {
     res.render('helloworld.ejs');
 
-    // const start = spawn('python',['py-script.py', 'start'])
+    const start = spawn('python',['py-script.py', 'start'])
   
-    // start.stdout.on(`data`, (data) => {
-    //   console.log(data)
-    // });
+    start.stdout.on(`data`, (data) => {
+      console.log(data)
+    });
 
-    // start.on('close', (code) => {
-    //   console.log(`child process exited with code ${code}`);
-    // });
+    start.on('close', (code) => {
+      console.log(`child process exited with code ${code}`);
+    });
   });
 
 server.get('/newpage', function(req, res) {

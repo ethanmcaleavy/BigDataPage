@@ -5,8 +5,8 @@ import sys
 #     image = "error.png"
 #     print(image)
 
-# def start()
-#     print("started")
+def start():
+    print("started")
 
 def getCeleb(newImage):
     celebImage = "Alter.png"
@@ -15,6 +15,6 @@ def getCeleb(newImage):
 if __name__ == '__main__':
     if sys.argv[1] == "getCeleb":
         getCeleb(sys.argv[2])
-    # elif sys.argv[1] == "start":
-    #     start()
+    elif sys.argv[1] == "start":
+        start()
 
