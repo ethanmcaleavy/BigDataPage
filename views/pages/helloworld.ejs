@@ -1,0 +1,18 @@
+<%- include ('../partials/header') %>
+<%- include ('../partials/menu') %>
+
+<!DOCTYPE html>
+<body class= "main" style="background-color:rgb(199, 199, 199);">
+    <div class="container">
+        <br>
+        <h1 class="title">Home</h1>
+        <br>
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+            <div><input type="file" name="image" class="custom-file-upload"></div>
+            <br>
+            <div></div><button type="submit" class="btn btn-primary">Upload</button></div>
+        </form>
+    </div>
+</body>
+
+<%- include ('../partials/footer') %>

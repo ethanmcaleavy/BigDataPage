@@ -17,4 +17,3 @@ if __name__ == '__main__':
         getCeleb(sys.argv[2])
     elif sys.argv[1] == "start":
         start()
-
