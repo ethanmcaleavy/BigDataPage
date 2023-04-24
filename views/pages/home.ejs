@@ -2,11 +2,20 @@
 <%- include ('../partials/menu') %>
 
 <!DOCTYPE html>
-<body class= "main" style="background-color:rgb(199, 199, 199);">
+
+<body class= "main" style=" background-color: rgb(205,206,235);">
+    <div class = "logo">
+        <img src="StarMatchLogo.png" alt="ImageName">
+    </div>
+    <div id ="info">
+        <h1>
+            Welcome StarMatch,
+        </h1>
+        <p id="description">
+            Upload a photo of yourself and let StarMatch discover which celebrity you resemble the most.
+        </p>
+    </div>
     <div class="container">
-        <br>
-        <h1 class="title">Home</h1>
-        <br>
         <form action="/uploads" method="POST" enctype="multipart/form-data">
             <div><input type="file" name="image" class="custom-file-upload"></div>
             <br>
@@ -14,5 +23,4 @@
         </form>
     </div>
 </body>
-
 <%- include ('../partials/footer') %>
