@@ -24,7 +24,7 @@ server.get('/', (req, res) => {
   });
 
 server.get('/uploads', function(req, res) {
-  if (fileName = "error.png")
+  if (fileName = "error.png") //Only allow uploads page if user has inputted valid image
     return;
 
   console.log("second " + fileName)
