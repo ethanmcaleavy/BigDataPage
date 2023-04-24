@@ -24,6 +24,9 @@ server.get('/', (req, res) => {
   });
 
 server.get('/uploads', function(req, res) {
+  if (fileName = "error.png")
+    return;
+
   console.log("second " + fileName)
 
     axios.get('http://127.0.0.1:8123/getSimiliar')
