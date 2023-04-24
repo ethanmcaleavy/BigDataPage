@@ -26,19 +26,7 @@ const func = () => { //code in func to remove global variables
     if (fileName == "error.png") //Only allow uploads page if user has inputted valid image
       return res.redirect('/');
 
-    axios.get('http://127.0.0.1:8123/getSimiliar')
-      .then(response => {
-        let data = response.data.message;
-        console.log(data);
-
-        uploadsArr.push(data);
-        fileArr.push(fileName);
-
-        res.render('pages/uploads.ejs', { name: fileArr, data: uploadsArr})
-      })
-      .catch(error => {
-        console.error(error);
-      });
+      res.render('pages/uploads.ejs', { name: fileArr, data: uploadsArr})
   });
 
   server.get('/about', function(req, res) {
@@ -56,7 +44,23 @@ const func = () => { //code in func to remove global variables
 
     // Move the uploaded image to our upload folder
     image.mv(__dirname + '/upload/' + image.name);
-    res.redirect('/uploads');
+
+    if (fileName == "error.png") //Only allow uploads page if user has inputted valid image
+      return res.redirect('/');
+
+    axios.get('http://127.0.0.1:8123/getSimiliar')
+      .then(response => {
+        let data = response.data.message;
+        console.log(data);
+
+        uploadsArr.push(data);
+        fileArr.push(fileName);
+        res.redirect('/uploads');
+        
+        })
+      .catch(error => {
+          console.error(error);
+      });
   });
 }
 
