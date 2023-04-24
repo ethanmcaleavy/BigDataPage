@@ -1,0 +1,66 @@
+<%- include ('../partials/header') %>
+<%- include ('../partials/menu') %>
+
+<!DOCTYPE html>
+<body class="main" style="background-color: rgb(199, 199, 199);">
+  <div class="container">
+    <br>
+    <h1 class="title">Uploads</h1>
+    <br>
+    <h1>Most Similar To <%= data[0][1] %> with a similarity score of <%= data[0][2] %></h1>
+    <br>
+  </div>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+
+  <div class="row">
+      <div class="col-md-6">
+        <img src="/upload/<%= name %>" alt="ImageName" width = 800>
+      </div>
+      <div class="col-md-6">
+          <div class="swiper sample-slider">
+              <div class="swiper-wrapper">
+                  <% for (let i = 0; i < data.length; i++) { %>
+                    <div class = "swiper-slide">
+                      <h3><%= i+1 %>. <%= data[i][1] %></h3>
+                      <p><%= data[i][2]%>% match</p>
+                      <img src="/upload/<%= data[i][0] %>" />
+                    </div>
+                    <% }; %>
+              </div>
+              <div class="swiper-pagination"></div>
+              <div class="swiper-button-prev"></div>
+              <div class="swiper-button-next"></div>
+          </div>
+      </div>
+  </div>
+</body>
+
+
+<script>
+    const swiper = new Swiper('.sample-slider', {
+        loop: true,                      
+        effect: "cube",                    
+        cubeEffect: {
+            shadow: false,                 
+            slideShadows: false,         
+        },
+        grabCursor: true,   
+        // bigger number = slower               
+        speed: 600,                  
+                 
+        pagination: {                       
+            el: '.swiper-pagination',
+        },
+        navigation: {                       
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+        keyboard: {
+        enabled: true,
+        },
+    })
+</script>
+  
+<%- include ('../partials/footer') %>

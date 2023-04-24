@@ -5,54 +5,51 @@ const bodyParser = require('body-parser');
 const ejs = require('ejs');
 const { spawn } = require("child_process");
 
+
+const axios = require('axios');
 server.use(express.static(__dirname + '/'));
 server.use('/upload', express.static('upload'));
 server.use(fileUpload());
 server.set('view engine', 'ejs');
 
 
-let fileName = "error";
+let fileName = "error.png";
 
 server.listen(8080, () => {
   console.log("Application started and Listening on port 8080");
 });
 
 server.get('/', (req, res) => {
-    res.render('pages/helloworld.ejs');
-
-    // const start = spawn('python',['py-script.py', 'start'])
-  
-    // start.stdout.on(`data`, (data) => {
-    //   console.log(data)
-    // });
-
-    // start.on('close', (code) => {
-    //   console.log(`child process exited with code ${code}`);
-    // });
+    res.render('pages/home.ejs');
   });
 
 server.get('/uploads', function(req, res) {
   console.log("second " + fileName)
 
-    //Begin child process on getCeleb func
-    const script = spawn('python',['py-script.py', 'getCeleb', fileName])
-  
-    let image = ""; 
-    script.stdout.on(`data`, (data) => {
-      image += data; // Append the received data to the variable
-      res.render('pages/secondHelloWorld.ejs', { name: fileName, additional: image });
-  });
+    axios.get('http://127.0.0.1:8123/getSimiliar')
+      .then(response => {
+        let data = response.data.message;
+        console.log(data);
+        const arr = []; // Create an empty array to store the converted data
+        
+        for (let i = 0; i < data.length; i += 3) 
+        {
+          arr.push(data.slice(i, i + 3));
+        }
 
-    script.on('close', (code) => {
-      console.log(`child process exited with code ${code}`);
-    });
+        res.render('pages/uploads.ejs', { name: fileName, data: data})
+      })
+      .catch(error => {
+        console.error(error);
+      });
 });
+
 
 server.get('/about', function(req, res) {
   res.render('pages/about.ejs');
 });
 
-server.post('/upload', (req, res) => {
+server.post('/uploads', (req, res) => {
   // Get the file that was set to our field named "image"
   const { image } = req.files;
   fileName = image.name;

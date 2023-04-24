@@ -1,3 +1,52 @@
+    .sample-slider{
+        width:90%;
+        background: rgba(199, 199, 199, 0.505);
+        background-position: center;
+        background-size: cover;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+    .sample-slider img{
+        width: 100%;
+    }
+
+    body {
+    position: relative;
+    height: 100%;
+    }
+
+    body {
+    background: #eee;
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: #000;
+    margin: 0;
+    padding: 0;
+  }
+  .swiper-slide-text {
+    position: absolute;
+    top: 20px;
+    left: 0;
+    right: 150;
+    margin: auto;
+  }
+
+    .swiper-button-next, .swiper-button-prev{
+    color: white !important;
+    top: 55% !important;
+    outline: none !important;
+  }
+
+  .swiper-button-next{
+    right: 3em !important;
+  }
+
+  .swiper-button-prev{
+    left: 3em !important;
+  }
+
+
 .custom-file-upload {
     background-color: #007bff;
     display: inline-block;
@@ -33,22 +82,7 @@ h1.title {
     font-family: 'Quicksand', sans-serif;
   } */
 
-.modal-content {
-    background: rgb(0, 0, 0);
-  }
-
-.modal-background {
-    background: rgb(0, 0, 0);
-}
-
-.modal-overlay {
-    background: rgb(0, 0, 0);
-  }
-.modal-container {
-    background: rgb(0, 0, 0);
-  }
-
-tr {
+/* tr {
     color: rgb(25, 209, 246);
     padding-top: 3px;
     padding-top: 3px;
@@ -57,11 +91,11 @@ tr {
 }
 
 .table-condensed tr th {
-    border-bottom: 2px solid rgb(255, 0, 64); /* Change the color you want to set */
+    border-bottom: 2px solid rgb(255, 0, 64);
  }
  
  .table-condensed tr td {
-    border-bottom: 1px solid rgb(175, 4, 4); /* Change the color you want to set */
+    border-bottom: 1px solid rgb(175, 4, 4);
  }
  
  table td 
@@ -75,12 +109,7 @@ td {
     padding-top: 3px;
     text-align: left;
     font-family: 'Quicksand', sans-serif;
-}
-
-body {
-    height: 100%;
-    width: 100%;
-}
+} */
 
 .FixedHeightContainer {
     height: 800px;
@@ -101,44 +130,6 @@ label {
     color: rgb(0, 0, 0);
     font-size: 66px;
     /* text-shadow: 1px 1px 3px rgb(8, 57, 163), 0 0 5px rgb(0, 0, 0), 0 0 5px rgb(0, 0, 0); */
-}
-
-.rating {
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: center
-}
-
-.rating>input {
-    display: none
-}
-
-.rating>label {
-    position: relative;
-    width: 1em;
-    font-size: 30px;
-    font-weight: 300;
-    color: #FFD600;
-    cursor: pointer
-}
-
-.rating>label::before {
-    content: "\2605";
-    position: absolute;
-    opacity: 0
-}
-
-.rating>label:hover:before,
-.rating>label:hover~label:before {
-    opacity: 1 !important
-}
-
-.rating>input:checked~label:before {
-    opacity: 1
-}
-
-.rating:hover>input:checked~label:before {
-    opacity: 0.4
 }
 
 .navbar .nav-item{
