@@ -1,10 +1,22 @@
+
+    .col-md-6 {
+        display: flex;
+        justify-content: center;
+    }
+
+    .col-md-6 img {
+        max-height: 100%; 
+        max-width: 100%; 
+        margin: auto;
+      }
+
     .imageContainer {
         padding-left: 100px;
         padding-right: 100px;
     }
 
     .sample-slider{
-        width:98%;
+        width:97%;
         background: rgba(199, 199, 199, 0.505);
         background-position: center;
         background-size: cover;
@@ -40,7 +52,7 @@
     .swiper-button-next, .swiper-button-prev{
     color: white !important;
     top: 55% !important;
-    outline: none !important;
+    /* outline: none !important; */
   }
 
   .swiper-button-next{

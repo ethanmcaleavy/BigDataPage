@@ -7,7 +7,7 @@
     <br>
     <h1 class="title">Uploads</h1>
     <br>
-    <h1>Most Similar To <%= data[0][1] %> with a <%= data[0][2] %>% match</h1>
+    <h1>Most Similar To <%= data[data.length - 1][0][1] %> with a <%= data[data.length - 1][0][2] %>% match</h1>
     <br>
   </div>
 
@@ -15,29 +15,32 @@
   <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 
   <div class="imageContainer">
-    <div class="row">
-        <div class="col-md-6">
-            <img src="/upload/<%= name %>" alt="ImageName" width = 600>
-        </div>
-        <div class="col-md-6">
-            <div class="swiper sample-slider">
-                <div class="swiper-wrapper">
-                    <% for (let i = 0; i < data.length; i++) { %>
-                      <div class = "swiper-slide">
-                        <h3><%= i+1 %>. <%= data[i][1] %></h3>
-                        <p><%= data[i][2]%>% match</p>
-                        <img src="/upload/<%= data[i][0] %>" />
+    <% for (let i = data.length - 1; i >= 0; i--) { %>
+          <div class="row">
+              <div class="col-md-6">
+                  <img src="/upload/<%= name[i] %>" alt="ImageName" width = 600>
+              </div>
+              <div class="col-md-6">
+                  <div class="swiper sample-slider">
+                      <div class="swiper-wrapper">
+                          <% for (let j = 0; j < data[0].length; j++) { %>
+                            <div class = "swiper-slide">
+                              <h3><%= j+1 %>. <%= data[i][j][1] %></h3>
+                              <p><%= data[i][j][2]%>% match</p>
+                              <img src="/upload/<%= data[i][j][0] %>" />
+                            </div>
+                            <% }; %>
                       </div>
-                      <% }; %>
-                </div>
-                <div class="swiper-pagination"></div>
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-button-next"></div>
-            </div>
-        </div>
-    </div>
+                      <div class="swiper-pagination"></div>
+                      <div class="swiper-button-prev"></div>
+                      <div class="swiper-button-next"></div>
+                  </div>
+              </div>
+          </div>
+          <br>
+          <br>
+      <% }; %>
   </div>
-  <br>
   <br>
 </body>
 
