@@ -3,8 +3,8 @@ import numpy as np
 
 app = Flask(__name__)
 
-@app.route('/start', methods = ['GET'])
-def start(): #implement this function if we need to initially run python code
+# @app.route('/start', methods = ['GET'])
+# def start(): #implement this function if we need to initially run python code
 
 @app.route('/getSimiliar', methods = ['GET'])
 def getSimiliar():
