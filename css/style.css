@@ -1,3 +1,8 @@
+    .imageContainer {
+        padding-left: 100px;
+        padding-right: 100px;
+    }
+
     .sample-slider{
         width:95%;
         background: rgba(199, 199, 199, 0.505);
