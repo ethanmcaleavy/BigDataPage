@@ -1,3 +1,3 @@
 # BigDataGcpPage
 
-To start the page and run the servers in parrallel use "npm start & python server.py"
+To start the page and run the servers in parrallel use "npm start"
