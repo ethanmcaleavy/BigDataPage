@@ -1,4 +1,24 @@
+    .main .title {
+        padding-top: 2px;
+        font-size: 2rem;
+        font-weight: bold;
+        font-weight: 100;
+        text-align: left;
+        font-family: 'Pacifico'; 
+        color: rgb(0, 0, 0);
+        font-size: 76px;
+    }
 
+    .matchHeader {
+        text-align: center;
+        font-size: 35px;
+    }
+
+    .col-md-6 {
+        display: inline-block;
+        justify-content: center;
+    }
+    
     .col-md-6 {
         display: flex;
         justify-content: center;
@@ -11,8 +31,8 @@
       }
 
     .imageContainer {
-        padding-left: 100px;
-        padding-right: 100px;
+        padding-left: 150px;
+        padding-right: 150px;
     }
 
     .sample-slider{
@@ -83,7 +103,7 @@
     vertical-align: middle;
 }
 
-h1.title {
+/* h1.title {
     color: rgb(65, 217, 247);
     padding-top: 17px;
     padding-top: 17px;
@@ -92,41 +112,21 @@ h1.title {
     font-family: 'Quicksand', sans-serif;
 }
 
-/* h2.title {
+h2.title {
+    color: rgb(65, 217, 247);
+    padding-top: 17px;
+    padding-top: 17px;
     text-align: center;
-    font-size: 1.2em;
     font-weight: bold;
-    font-family: 'Quicksand', sans-serif;
-  } */
-
-/* tr {
-    color: rgb(25, 209, 246);
-    padding-top: 3px;
-    padding-top: 3px;
-    text-align: left;
-    font-family: 'Quicksand', sans-serif;
-}
-
-.table-condensed tr th {
-    border-bottom: 2px solid rgb(255, 0, 64);
- }
- 
- .table-condensed tr td {
-    border-bottom: 1px solid rgb(175, 4, 4);
- }
- 
- table td 
- { 
-    border:solid 1px rgb(25, 209, 246); 
- }
-
-td {
-    color: rgb(25, 209, 246);
-    padding-top: 3px;
-    padding-top: 3px;
-    text-align: left;
-    font-family: 'Quicksand', sans-serif;
+    font-family: 'Pacifico', cursive;
 } */
+
+hr.new {
+    border: 10px solid #3f6f00;
+    border-radius: 8px;
+    border-style: solid;
+    opacity: 1;
+  }
 
 .FixedHeightContainer {
     height: 800px;
@@ -135,18 +135,6 @@ td {
 
 label {
     color: rgb(25, 209, 246);
-}
-
-.main .title {
-    padding-top: 2px;
-    font-size: 2rem;
-    font-weight: bold;
-    font-weight: 500;
-    text-align: left;
-    font-family: 'Pacifico'; 
-    color: rgb(0, 0, 0);
-    font-size: 66px;
-    /* text-shadow: 1px 1px 3px rgb(8, 57, 163), 0 0 5px rgb(0, 0, 0), 0 0 5px rgb(0, 0, 0); */
 }
 
 .navbar .nav-item{
