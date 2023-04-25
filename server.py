@@ -6,8 +6,9 @@ app = Flask(__name__)
 # @app.route('/start', methods = ['GET'])
 # def start(): #implement this function if we need to initially run python code
 
-@app.route('/getSimiliar', methods = ['GET'])
-def getSimiliar():
+@app.route('/getSimiliar/<imageName>', methods = ['GET']) #takes image and returns data
+def getSimiliar(imageName): 
+    print("python recieved image: ", imageName)
     arr = np.array([['1.png', 'John John', '90.2'],['2.png', 'Bob John', '80.3'], #Example data 
                     ['3.jpg', 'Dog Bon', '73.2']])
 

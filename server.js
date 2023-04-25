@@ -48,7 +48,7 @@ const func = () => { //code in func to remove global variables
     if (fileName == "error.png") //Only allow uploads page if user has inputted valid image
       return res.redirect('/');
 
-    axios.get('http://127.0.0.1:8123/getSimiliar')
+    axios.get('http://127.0.0.1:8123/getSimiliar/' + fileName) //pass in image to python
       .then(response => {
         let data = response.data.message;
         console.log(data);
