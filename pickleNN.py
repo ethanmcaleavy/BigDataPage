@@ -12,14 +12,12 @@ from deepface.commons import distance
 def main(uploadedImage):
 
 
-    mat = scipy.io.loadmat('./imageData/imdb_crop/imdb')
+    mat = scipy.io.loadmat('./imdb_files2/imdb')
     instances = mat['imdb'][0][0][0].shape[1]
     df = pd.read_pickle('./FacialNNDFtest3.pkl')
     testfacefilepath = uploadedImage #'photo.jpg'
-    img = cv2.imread('./upload/'+testfacefilepath)
     initial_representation = DeepFace.represent(img_path = './upload/'+testfacefilepath,model_name="VGG-Face", detector_backend="opencv", enforce_detection = False)
     yourself_representation = initial_representation[0]["embedding"]
-    from deepface.commons import distance
     distance1 = []
 
 
@@ -42,11 +40,11 @@ def main(uploadedImage):
         similarity = instance['similarity']
         similarity = (1 - similarity)*100
         full_path = instance['full_path'][0]
-        img = cv2.imread("./imageData/imdb_crop/%s" % full_path)
        
         tempArr = [full_path, name, round(similarity, 2)]
         arr.append(tempArr)
     print(json.dumps(arr))
+
 
 
 if __name__ == '__main__':
