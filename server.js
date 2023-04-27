@@ -1,8 +1,8 @@
 const express = require("express");
 const server = express();
 const fileUpload = require('express-fileupload');
+const { spawn } = require("child_process");
 
-const axios = require('axios');
 server.use(express.static(__dirname + '/'));
 server.use('/upload', express.static('upload'));
 server.use(fileUpload());
@@ -26,7 +26,24 @@ const func = () => { //code in func to remove global variables
     if (fileName == "error.png") //Only allow uploads page if user has inputted valid image
       return res.redirect('/');
 
-      res.render('pages/uploads.ejs', { name: fileArr, data: uploadsArr})
+      //Create child process
+      const py = spawn('python',['pickleNN.py', fileName]);
+      console.log("Entered server.get with fileName: ", fileName);
+      //Execute python file
+      py.stdout.on(`data`, (data) =>{
+        console.log(`stdout: ${data}`);
+        console.log(JSON.stringify(data));
+        console.log(JSON.parse(JSON.stringify(data)))
+
+        uploadsArr.push(JSON.parse(data.toString()));
+        fileArr.push(fileName);
+        res.render('pages/uploads.ejs', { name: fileArr, data: uploadsArr });
+      });
+ 
+      py.on('close', (code) => {
+        console.log(`child process exited with code ${code}`);
+      });
+
   });
 
   server.get('/about', function(req, res) {
@@ -37,7 +54,7 @@ const func = () => { //code in func to remove global variables
     // Get the file that was set to our field named "image"
     const { image } = req.files;
     fileName = image.name;
-    console.log("image name: " + fileName)
+    console.log("image name in post uploads: " + fileName)
 
     // If no image submitted, exit
     if (!image) return res.sendStatus(400);
@@ -47,20 +64,9 @@ const func = () => { //code in func to remove global variables
 
     if (fileName == "error.png") //Only allow uploads page if user has inputted valid image
       return res.redirect('/');
-
-    axios.get('http://127.0.0.1:8123/getSimiliar/' + fileName) //pass in image to python
-      .then(response => {
-        let data = response.data.message;
-        console.log(data);
-
-        uploadsArr.push(data);
-        fileArr.push(fileName);
-        res.redirect('/uploads');
-        
-        })
-      .catch(error => {
-          console.error(error);
-      });
+    else
+      res.redirect('/uploads');
+   
   });
 }
 
