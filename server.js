@@ -59,7 +59,7 @@ const func = () => { //code in func to remove global variables
       return res.redirect('/');
    
     //Create child process
-    const py = spawn('python3',['pickleNN.py', fileName]);
+    const py = spawn('python',['pickleNN.py', fileName]);
     console.log("Entered server.get with fileName: ", fileName);
     //Execute python file
     py.stdout.on(`data`, (data) =>{
