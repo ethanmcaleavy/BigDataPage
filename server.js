@@ -24,7 +24,10 @@ const func = () => { //code in func to remove global variables
 
 
   server.get('/', (req, res) => {
-    res.render('pages/home.ejs');
+    var errorMessage = req.query.error;
+    res.render('pages/home.ejs', {
+      message: errorMessage
+    });
   });
 
 
@@ -59,18 +62,24 @@ const func = () => { //code in func to remove global variables
       return res.redirect('/');
    
     //Create child process
-    const py = spawn('python',['pickleNN.py', fileName]);
+    const py = spawn('python3',['pickleNN.py', fileName]);
     console.log("Entered server.get with fileName: ", fileName);
     //Execute python file
     py.stdout.on(`data`, (data) =>{
-      console.log(`stdout: ${data}`);
-      console.log(JSON.stringify(data));
-      console.log(JSON.parse(JSON.stringify(data)))
+      errorOutput = data.toString().trim();
+      console.log("nodejs stdout");
+      console.log(errorOutput);
 
 
-      uploadsArr.push(JSON.parse(data.toString()));
-      fileArr.push(fileName);
-      res.redirect('/uploads');
+      if (errorOutput.includes("No face was recognized"))
+      res.redirect('/?error=No%20face%20was%20recognized.%20Please%20try%20again%20with%20a%20different%20file.');
+      
+      else
+      {
+        uploadsArr.push(JSON.parse(data.toString()));
+        fileArr.push(fileName);
+        res.redirect('/uploads');
+      }
     });
 
 
