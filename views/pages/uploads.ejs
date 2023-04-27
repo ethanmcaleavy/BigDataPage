@@ -1,6 +1,7 @@
 <%- include ('../partials/header') %>
 <%- include ('../partials/menu') %>
 
+
 <!DOCTYPE html>
 <body class="main" style="background-color: rgb(199, 199, 199);">
   <div class="container">
@@ -9,8 +10,10 @@
     <br>
   </div>
 
+
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css">
   <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+
 
   <div class="imageContainer">
       <% for (let i = data.length - 1; i >= 0; i--) { %>
@@ -21,6 +24,7 @@
                 font-size: 35px;">Best Match: <%= data[i][0][1] %> | <%= data[i][0][2] %>% Match</h4>
               </div>
             </div>
+
 
             <div class="row">
                 <div class="col-md-6">
@@ -37,7 +41,7 @@
                                 <h5 style = "font-weight: bold;
                                 font-family: 'Quicksand', sans-serif;
                                 font-size: 35px;"><%= data[i][j][2]%>% match</p>
-                                <img src="/upload/<%= data[i][j][0] %>" />
+                                <img src="./imageData/imdb_crop/<%= data[i][j][0] %>" />
                               </div>
                               <% }; %>
                         </div>
@@ -55,20 +59,22 @@
 </body>
 
 
+
+
 <script>
     const swiper = new Swiper('.sample-slider', {
         loop: true,
-        grabCursor: true,               
-        speed: 600,    // bigger number = slower                       
+        grabCursor: true,              
+        speed: 600,    // bigger number = slower                      
         effect: "cube",                    
         cubeEffect: {
-            shadow: false,                 
-            slideShadows: false,         
-        },                       
-        pagination: {                       
+            shadow: false,                
+            slideShadows: false,        
+        },                      
+        pagination: {                      
             el: '.swiper-pagination',
         },
-        navigation: {                       
+        navigation: {                      
             nextEl: ".swiper-button-next",
             prevEl: ".swiper-button-prev",
         },
@@ -81,5 +87,5 @@
         // },
     })
 </script>
-  
+ 
 <%- include ('../partials/footer') %>
