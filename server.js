@@ -72,7 +72,7 @@ const func = () => { //code in func to remove global variables
 
 
       if (errorOutput.includes("No face was recognized"))
-      res.redirect('/?error=No%20face%20was%20recognized.%20Please%20try%20again%20with%20a%20different%20file.');
+      res.redirect('/?error=No%20face%20was%20recognized,%20please%20try%20again%20with%20a%20different%20file.');
       
       else
       {
