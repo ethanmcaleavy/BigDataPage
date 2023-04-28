@@ -20,7 +20,7 @@
     position: relative;
     width: 500px;
     height: 3em;
-    background-color: #c001b0;
+    background-color: #000000 !important;
     border-radius: 1.5em;
   }
 
@@ -35,7 +35,7 @@
     width: calc(var(--width, 0) * 1%);
     min-width: 2rem;
     max-width: calc(100% - 1em);
-    background-color: #000000;
+    background-color: #008ab8;
     border-radius: 1em;
     padding: 1em;
   }
@@ -137,7 +137,7 @@
 }
 
 hr.new {
-    border: 10px solid #3f6f00;
+    border: 10px solid #008ab8;
     border-radius: 8px;
     border-style: solid;
     opacity: 1;
@@ -162,7 +162,7 @@ label {
 .navbar{
     padding-top: 3px;
     padding-bottom: 3px;
-    background-image: linear-gradient(-90deg, #3f6f00, #d70e0e );
+    background-image: linear-gradient(-90deg,#252972, #008ab8); 
     border:4px solid rgb(0, 0, 0);
     
 }
