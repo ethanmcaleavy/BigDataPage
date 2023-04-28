@@ -4,7 +4,6 @@ import scipy.io
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-import cv2
 from deepface import DeepFace
 from deepface.commons import distance
 
@@ -16,8 +15,14 @@ def main(uploadedImage):
     instances = mat['imdb'][0][0][0].shape[1]
     df = pd.read_pickle('./FacialNNDFtest3.pkl')
     testfacefilepath = uploadedImage #'photo.jpg'
-    initial_representation = DeepFace.represent(img_path = './upload/'+testfacefilepath,model_name="VGG-Face", detector_backend="opencv", enforce_detection = False)
-    yourself_representation = initial_representation[0]["embedding"]
+
+    try:
+        initial_representation = DeepFace.represent(img_path = './upload/'+testfacefilepath,model_name="VGG-Face", detector_backend="opencv") #enforce_detection = False to turn off detection requirement
+        yourself_representation = initial_representation[0]["embedding"]
+
+    except ValueError as error:
+        print(json.dumps('No face was recognized, please try again with a different file.'))
+        return
     distance1 = []
 
 

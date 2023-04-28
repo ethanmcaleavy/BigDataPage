@@ -45,13 +45,13 @@ const func = () => { //code in func to remove global variables
 
   server.post('/uploads', (req, res) => {
     // Get the file that was set to our field named "image"
-    const { image } = req.files;
+    if (!req.files) {
+      return res.redirect('/?error=No%20file%20was%20chosen,%20please%20choose%20an%20image%20before%20uploading.');
+    }
+
+    const {image} = req.files;
     fileName = image.name;
     console.log("image name in post uploads: " + fileName)
-
-
-    // If no image submitted, exit
-    if (!image) return res.sendStatus(400);
 
 
     // Move the uploaded image to our upload folder
