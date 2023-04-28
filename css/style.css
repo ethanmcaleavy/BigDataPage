@@ -79,7 +79,7 @@
 
     .sample-slider{
         width:97%;
-        background: rgba(199, 199, 199, 0.505);
+        background: rgb(199, 199, 199);
         background-position: center;
         background-size: cover;
         align-items: center;
