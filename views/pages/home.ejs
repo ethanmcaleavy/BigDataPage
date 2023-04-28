@@ -24,30 +24,72 @@
             <br>
             <div></div><button type="submit" id="submit-btn-div" class="btn btn-primary">Upload</button></div>
         </form>
-
         <div class="progress-bar" style="--width: 10" data-label="Finding Matches..."></div>
     </div>
 
 </body>
+
+<!-- <script>
+    const progressBar = document.getElementsByClassName('progress-bar')[0];
+    progressBar.style.display = 'none';
+
+    const savedProgress = localStorage.getItem('progress');
+    const savedLabel = localStorage.getItem('label');
+    const progressIncrement = 0;
+
+    if (localStorage.getItem('time'))
+        progressIncrement = (new Date().getTime() - localStorage.getItem('time')) / 100;
+
+    if (savedProgress && savedLabel) {
+    progressBar.style.setProperty('--width', savedProgress);
+    progressBar.setAttribute('data-label', savedLabel);
+    showProgressBar();
+}
+
+    function showProgressBar() {
+    console.log("showing progress bar");
+      progressBar.style.display = 'block';
+      setInterval(() => {
+        if (width >= 1000)
+        {
+            localStorage.removeItem('time');
+            localStorage.removeItem('label');
+            localStorage.removeItem('progress');
+            progressBar.setAttribute("data-label", "Finalizing Results...");
+        }
+        
+        else
+        {
+            const computedStyle = getComputedStyle(progressBar);
+            const width = parseFloat(computedStyle.getPropertyValue('--width')) || 0;
+            progressBar.style.setProperty('--width', width + .1 + progressIncrement);
+
+            localStorage.setItem('progress', progressBar.style.getPropertyValue('--width'));
+            localStorage.setItem('label', progressBar.getAttribute('data-label'));
+            localStorage.setItem('time', new Date().getTime());
+        }
+      }, 26); //25
+    }
+</script> -->
 
 <script>
     const progressBar = document.getElementsByClassName('progress-bar')[0];
     progressBar.style.display = 'none';
 
     function showProgressBar() {
-    console.log("showing progress bar");
-      progressBar.style.display = 'block';
-      setInterval(() => {
-        const computedStyle = getComputedStyle(progressBar);
-        const width = parseFloat(computedStyle.getPropertyValue('--width')) || 0;
-        progressBar.style.setProperty('--width', width + .1);
-
-        if (width >= 100)
-            progressBar.setAttribute("data-label", "Finalizing Results...");
-      }, 26); //25
+        console.log("showing progress bar");
+        progressBar.style.display = 'block';
+        setInterval(() => {
+            const computedStyle = getComputedStyle(progressBar);
+            let width = parseFloat(computedStyle.getPropertyValue('--width')) || 0;
+            if (width >= 100) {
+                progressBar.setAttribute("data-label", "Finalizing Results...");
+            } else {
+                const computedStyle = getComputedStyle(progressBar);
+                const width = parseFloat(computedStyle.getPropertyValue('--width')) || 0;
+                progressBar.style.setProperty('--width', width + .1);
+            }
+        }, 26);
     }
 </script>
-
-
-
 <%- include ('../partials/footer') %>
