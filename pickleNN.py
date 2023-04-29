@@ -8,12 +8,19 @@ from deepface import DeepFace
 from deepface.commons import distance
 
 
-def main(uploadedImage):
+def main(uploadedImage, gender):
 
 
     mat = scipy.io.loadmat('./imdb_files2/imdb')
     instances = mat['imdb'][0][0][0].shape[1]
     df = pd.read_pickle('./FacialNNDFtest3.pkl')
+
+    if (gender == "Male"):
+        df = df[df['gender'] == 1]
+
+    if (gender == "Female"):
+        df = df[df['gender'] == 0]
+
     testfacefilepath = uploadedImage #'photo.jpg'
 
     try:
@@ -39,7 +46,7 @@ def main(uploadedImage):
     arr = [] #initialize empty array to return
 
 
-    for i in range(0, 4): #6
+    for i in range(0, 8): #6
         instance = pivot_df.iloc[i]
         name = instance['celebrity_name']
         similarity = instance['similarity']
@@ -53,4 +60,4 @@ def main(uploadedImage):
 
 
 if __name__ == '__main__':
-    main(sys.argv[1])
+    main(sys.argv[1], sys.argv[2])

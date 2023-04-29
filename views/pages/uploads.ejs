@@ -21,7 +21,8 @@
               <div class="matchHeader">
                 <h4 style = "font-weight: bold;
                 font-family: 'Quicksand', sans-serif;
-                font-size: 35px;">Best Match: <%= data[i][0][1] %> | <%= data[i][0][2] %>% Match</h4>
+                font-size: 35px;">Best Match <% if (gender[i] != "") { %>
+    <span>(<%= gender[i] %>)</span><% } %> | <%= data[i][0][2] %>% Match </h4>
               </div>
             </div>
 

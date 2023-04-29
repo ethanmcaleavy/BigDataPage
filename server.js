@@ -1,5 +1,6 @@
 const express = require("express");
 const server = express();
+const bodyParser = require('body-parser');
 const fileUpload = require('express-fileupload');
 const { spawn } = require("child_process");
 
@@ -7,6 +8,8 @@ const { spawn } = require("child_process");
 server.use(express.static(__dirname + '/'));
 server.use('/upload', express.static('upload'));
 server.use(fileUpload());
+server.use(express.urlencoded({ extended: true }));
+server.use(bodyParser.urlencoded({ extended: true }));
 server.set('view engine', 'ejs');
 
 
@@ -16,6 +19,7 @@ const func = () => { //code in func to remove global variables
   let fileName = "error.png";
   let uploadsArr = []; //array of returned celebrity data
   let fileArr = []; //array of uploaded images
+  let genderArr = []; //array of genders that results have been narrowed by
 
 
   server.listen(8080, () => {
@@ -34,7 +38,7 @@ const func = () => { //code in func to remove global variables
   server.get('/uploads', function(req, res) {
     if (fileName == "error.png") //Only allow uploads page if user has inputted valid image
       return res.redirect('/');
-    res.render('pages/uploads.ejs', { name: fileArr, data: uploadsArr });
+    res.render('pages/uploads.ejs', { name: fileArr, data: uploadsArr, gender: genderArr });
   });
 
 
@@ -50,20 +54,20 @@ const func = () => { //code in func to remove global variables
     }
 
     const {image} = req.files;
-    fileName = image.name;
-    console.log("image name in post uploads: " + fileName)
+    const gender = req.body.gender;
+    console.log("image name in post uploads: " + image.name)
 
 
     // Move the uploaded image to our upload folder
     image.mv(__dirname + '/upload/' + image.name);
 
 
-    if (fileName == "error.png") //Only allow uploads page if user has inputted valid image
+    if (image.name == "error.png") //Only allow uploads page if user has inputted valid image
       return res.redirect('/');
    
     //Create child process
-    const py = spawn('python3',['pickleNN.py', fileName]);
-    console.log("Entered server.get with fileName: ", fileName);
+    const py = spawn('python3',['pickleNN.py', image.name, gender]);
+    console.log("Entered server.get with fileName: ", image.name, gender);
     //Execute python file
     py.stdout.on(`data`, (data) =>{
       errorOutput = data.toString().trim();
@@ -76,8 +80,10 @@ const func = () => { //code in func to remove global variables
       
       else
       {
+        fileName = image.name;
         uploadsArr.push(JSON.parse(data.toString()));
         fileArr.push(fileName);
+        genderArr.push(gender);
         res.redirect('/uploads');
       }
     });

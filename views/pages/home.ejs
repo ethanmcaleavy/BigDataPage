@@ -16,6 +16,9 @@
             Upload a jpg photo of yourself and let StarMatch discover which celebrity you resemble the most.
         </p>
     </div>
+
+    <br>
+
     <div class="containertwo">
         <form action="/uploads" method="POST" enctype="multipart/form-data" onsubmit="showProgressBar()">
             <div>
@@ -23,7 +26,18 @@
             </div>
             <br>
             <div></div><button type="submit" id="submit-btn-div" class="btn btn-primary">Upload</button></div>
+
+        <div class = dropdownContainer>
+            <label for="gender" id="dropDowndescription">Narrow Results:</label>
+            <select name="gender" id="gender">
+                <option value="" selected>All</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+        </div>
         </form>
+
+        <br>
         <div class="progress-bar" style="--width: 10" data-label="Finding Matches..."></div>
     </div>
 
@@ -31,9 +45,15 @@
 
 <script>
     const progressBar = document.getElementsByClassName('progress-bar')[0];
+
     progressBar.style.display = 'none';
 
     function showProgressBar() {
+        const genderSelect = document.getElementById('gender');
+		genderSelect.style.display = 'none';
+        const dropdown = document.getElementById('dropDowndescription');
+		dropdown.style.display = 'none';
+
         const fileInput = document.getElementById('file-upload');
         if (fileInput.value) 
         {

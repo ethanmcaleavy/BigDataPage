@@ -1,3 +1,16 @@
+  #gender{
+    background-color: #b6dff2; 
+    border-radius: 5px;
+  }
+
+  #gender:focus,
+  #gender:active,
+  #gender:checked {
+    outline: none;
+    border-color: #000000;
+    background-color: #b6dff2; 
+}
+  
   *, *::before, *::after {
     box-sizing: border-box;
   }
@@ -67,9 +80,10 @@
     }
 
     .col-md-6 img {
-        max-height: 100%; 
+        max-height: 750px; 
         max-width: 100%; 
         margin: auto;
+        object-fit: contain;
       }
 
     .imageContainer {
@@ -184,7 +198,7 @@ nav li {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    height: 25vh;
+    height: 10vh;
   }
   
   form {
@@ -225,9 +239,23 @@ nav li {
     font-size: 25px;
   }
 
+  .dropdownContainer {
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    font-size: 25px;
+  }
+
   #description {
     text-align: center;
     font-family: 'Roboto', sans-serif;
     font-size: 25px;
+  }
+
+  #dropDowndescription {
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    font-size: 25px;
+    padding: 0;
+    color: #000;
   }
 
