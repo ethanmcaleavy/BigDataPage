@@ -15,6 +15,8 @@ def main(uploadedImage, gender):
     instances = mat['imdb'][0][0][0].shape[1]
     df = pd.read_pickle('./FacialNNDFtest3.pkl')
 
+    df.drop(df[(df['name'] == "Casey Wilson") | (df['name'] == "Aunjanue Ellis") | (df['name'] == "Sophia Bush")].index, inplace = True) #delete mismatched data
+
     if (gender == "Male"):
         df = df[df['gender'] == 1]
 
