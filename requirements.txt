@@ -4,3 +4,5 @@ pandas
 matplotlib
 opencv-python-headless
 deepface
+tensorflow
+keras
