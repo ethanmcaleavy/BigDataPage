@@ -93,6 +93,14 @@ const func = () => { //code in func to remove global variables
       console.log(`child process exited with code ${code}`);
     });
   });
+
+  server.get('/delete', (req, res) => {
+    fileName = "error.png";
+    uploadsArr = [];
+    fileArr = [];
+    genderArr = [];
+    res.redirect('/');
+  });
 }
 
 

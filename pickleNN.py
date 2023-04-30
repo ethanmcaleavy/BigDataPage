@@ -82,7 +82,7 @@ def main(uploadedImage, gender):
     instances = mat['imdb'][0][0][0].shape[1]
     df = pd.read_pickle('./FacialNNDF.pkl')
 
-    df.drop(df[(df['name'] == "Casey Wilson") | (df['name'] == "Aunjanue Ellis") | (df['name'] == "Sophia Bush") | (df['name'] == "Patricia Heaton")].index, inplace = True) #delete mismatched data
+    df.drop(df[(df['name'] == "Casey Wilson") | (df['name'] == "Aunjanue Ellis") | (df['name'] == "Sophia Bush")  | (df['name'] == "Prince Charles") |(df['name'] == "Ted Danson")  |(df['name'] == "Ben Wishaw") | (df['name'] == "Matt Smith")  | (df['name'] == "Lyndsy Fonseca") |  (df['name'] == "Drew Barrymore") |  (df['name'] == "Candace Cameron Bure") | (df['name'] == "Patricia Heaton") | (df['name'] == "Lydnsy Fonseca") | (df['name'] == "Busy Philipps")].index, inplace = True) #delete mismatched data
 
     if (gender == "Male"):
         df = df[df['gender'] == 1]
