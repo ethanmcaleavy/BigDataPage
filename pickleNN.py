@@ -10,7 +10,6 @@ from deepface.commons import distance
 
 def main(uploadedImage, gender):
 
-    print("Directory")
     mat = scipy.io.loadmat('./imdb_files2/imdb')
     instances = mat['imdb'][0][0][0].shape[1]
     df = pd.read_pickle('./FacialNNDFtest3.pkl')
