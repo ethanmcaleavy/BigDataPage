@@ -113,7 +113,7 @@ def main(uploadedImage, gender):
         img_pixels = np.expand_dims(img_pixels, axis = 0)
         img_pixels /= 127.5
         img_pixels -= 1
-        yourself_representation = model.predict(img_pixels)[0,:]
+        yourself_representation = model.predict(img_pixels, verbose = 0)[0,:]
 
     distance1 = []
 
