@@ -80,8 +80,11 @@ const func = () => { //code in func to remove global variables
       
       else
       {
+        const startIndex = data.toString().indexOf('['); //ignore print statements that arent our data from deepface file
+        const jsonWithoutPrefix = data.toString().substring(startIndex);
+
         fileName = image.name;
-        uploadsArr.push(JSON.parse(data.toString()));
+        uploadsArr.push(JSON.parse(jsonWithoutPrefix));
         fileArr.push(fileName);
         genderArr.push(gender);
         res.redirect('/uploads');
