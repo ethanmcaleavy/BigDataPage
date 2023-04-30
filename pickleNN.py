@@ -99,6 +99,10 @@ def main(uploadedImage, gender):
 
     faces = face_cascade.detectMultiScale(img, 1.3, 5)
 
+    if (len(faces) == 0):
+        print(json.dumps('No face was recognized, please try again with a different file.'))#print("detected face has no margin")
+        return
+
     for (x,y,w,h) in faces:
         detected_face = img[int(y):int(y+h), int(x):int(x+w)]
         try:
@@ -107,14 +111,15 @@ def main(uploadedImage, gender):
             detected_face = img[int(y-margin_y):int(y+h+margin_y), int(x-margin_x):int(x+w+margin_x)]
         except:
             print(json.dumps('No face was recognized, please try again with a different file.'))#print("detected face has no margin")
+            return
         
         detected_face = cv2.resize(detected_face, (224, 224))
-        img_pixels = image.img_to_array(detected_face)
-        img_pixels = np.expand_dims(img_pixels, axis = 0)
-        img_pixels /= 127.5
-        img_pixels -= 1
-        yourself_representation = model.predict(img_pixels, verbose = 0)[0,:]
-
+        
+    img_pixels = image.img_to_array(detected_face)
+    img_pixels = np.expand_dims(img_pixels, axis = 0)
+    img_pixels /= 127.5
+    img_pixels -= 1
+    yourself_representation = model.predict(img_pixels, verbose = 0)[0,:]
     distance1 = []
 
 
